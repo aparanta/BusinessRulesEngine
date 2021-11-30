@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using BusinessRulesEngine.Managers;
 
 namespace BusinessRulesEngine.Controllers
 {
@@ -27,6 +28,16 @@ namespace BusinessRulesEngine.Controllers
         public int Get()
         {
             return 0;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> PostAsync(IPayment payment)
+        {
+            var paymentManager = new PaymentManager();
+
+            await paymentManager.Manage(payment);
+
+            return Ok();
         }
     }
 }
