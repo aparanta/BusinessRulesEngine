@@ -3,12 +3,12 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
+using BusinessRulesEngine.Interfaces;
 
 namespace BusinessRulesEngine.Managers
 {
     
-    public class PaymentProcessor 
+    public class PaymentProcessor : IPaymentProcessor
     {
         private static readonly HttpClient httpClient = new HttpClient();
         public async Task<string> Process(IPayment payment)

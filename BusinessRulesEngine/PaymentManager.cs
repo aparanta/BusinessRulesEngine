@@ -1,17 +1,21 @@
 using System;
 using System.Threading.Tasks;
+using BusinessRulesEngine.Interfaces;
 
 namespace BusinessRulesEngine.Managers
 {
-    public interface IPaymentManager {
-        public  Task<string> Manage(IPayment payment);
-        
-    }
+    
     public class PaymentManager :IPaymentManager
     {
+        private IPaymentProcessor paymentProcessor;
+
+        public PaymentManager(IPaymentProcessor processor)
+        {
+            paymentProcessor = processor;
+        }
         public async Task<string> Manage(IPayment payment)
         { //TODO
-            var paymentProcessor = new PaymentProcessor();
+            
 
             return await paymentProcessor.Process(payment);
         }

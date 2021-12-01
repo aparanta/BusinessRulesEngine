@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BusinessRulesEngine.Managers;
+using BusinessRulesEngine.Interfaces;
 
 namespace BusinessRulesEngine.Controllers
 {
@@ -18,10 +19,13 @@ namespace BusinessRulesEngine.Controllers
         };
 
         private readonly ILogger<BusinessRulesEngineController> _logger;
+        private IPaymentManager _paymentManager;
 
-        public BusinessRulesEngineController(ILogger<BusinessRulesEngineController> logger)
+        
+        public BusinessRulesEngineController(ILogger<BusinessRulesEngineController> logger,IPaymentManager paymentManager)
         {
             _logger = logger;
+            _paymentManager = paymentManager;
         }
 
         [HttpGet]
@@ -33,9 +37,9 @@ namespace BusinessRulesEngine.Controllers
         [HttpPost]
         public async Task<ActionResult> PostAsync(IPayment payment)
         {
-            var paymentManager = new PaymentManager();
+           
 
-            await paymentManager.Manage(payment);
+            await _paymentManager.Manage(payment);
 
             return Ok();
         }
