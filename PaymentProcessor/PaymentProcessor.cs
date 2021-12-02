@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PaymentProcessor.Rules;
 namespace PaymentProcessor
 
 {
@@ -9,12 +10,15 @@ namespace PaymentProcessor
         PhysicalProductPayment,
         NewMembership,
         UpgradeMembership,
+        BookPayment,
+
+        VideoPayment,
+
+        CommissionGenerated
+
     }
 
-    public interface IRule
-    {
-        void TakeAction() ;
-    }
+
     public abstract class Payment
     {
 
@@ -25,9 +29,11 @@ namespace PaymentProcessor
 
         public string PaymentInfo { get; set; }
 
-        
+
         private List<IRule> rules = new List<IRule>();
-         public void Attach(IRule rule)
+
+        private List<Result> results= new List<Result>();
+        public void Attach(IRule rule)
         {
             rules.Add(rule);
         }
@@ -44,7 +50,7 @@ namespace PaymentProcessor
             Console.WriteLine("");
         }
 
-        public Payment ()
+        public Payment()
         {
             Notify();
         }
@@ -53,9 +59,28 @@ namespace PaymentProcessor
     public class Result
     {
         public bool IsSuccess { get; set; }
-        public string ActionInfo { get; set; }
+        public PaymentInfoEnum ActionInfo { get; set; }
+    }
+
+    public class PhysicalProductPayment : Payment
+    {
+
+    }
+
+    public class NewMembership : Payment
+    {
+
+    }
+
+    public class UpgradeMembership : Payment
+    {
+
+    }
+
+    public class VideoPayment : Payment
+    {
+
     }
 
 
-    
 }

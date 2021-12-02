@@ -83,7 +83,8 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-
+#ionide 
+symbolCache.db
 # Chutzpah Test files
 _Chutzpah*
 

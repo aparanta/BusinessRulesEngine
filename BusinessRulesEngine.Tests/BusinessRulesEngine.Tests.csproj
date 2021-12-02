@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessRulesEngine\BusinessRulesEngine.csproj" />
+    <ProjectReference Include="..\PaymentProcessor\PaymentProcessor.csproj" />
   </ItemGroup>
 
 </Project>
