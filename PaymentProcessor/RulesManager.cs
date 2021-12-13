@@ -4,26 +4,36 @@ using PaymentProcessor;
 namespace PaymentProcessor.Rules
 
 {
-    public interface IRuleManager
+    public interface IRulesManager
     {
         public void Manage(Payment payment);
     }
 
-    public class RulesManager : IRuleManager
+    
+
+    public class RulesManager : IRulesManager
     {
-      public  void Manage(Payment payment)
+        public RulesManager()
         {
-           if( payment.Equals(typeof (PhysicalProductPayment)))
+        }
 
-           {
-             
-               payment.Attach(new GeneratePackingSlip());
-               payment.Attach(new IssueCommission() );
+        public void Manage(Payment payment)
+        { var something = 2 ; 
+        
+            if (payment.PaymentInfo ==PaymentInfoEnum.PhysicalProductPayment)
 
+            {
 
-           }
+                payment.Attach(new GeneratePackingSlip());
+                payment.Attach(new IssueCommission());
+                
+
+            }
+            payment.PaymentProcessor();
 
         }
+
+
     }
 
 

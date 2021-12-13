@@ -27,12 +27,12 @@ namespace PaymentProcessor
 
         public int Amount { get; set; }
 
-        public string PaymentInfo { get; set; }
+        public PaymentInfoEnum PaymentInfo { get; set; }
 
 
         private List<IRule> rules = new List<IRule>();
 
-        private List<Result> results= new List<Result>();
+        public List<Result> results = new List<Result>();
         public void Attach(IRule rule)
         {
             rules.Add(rule);
@@ -45,14 +45,17 @@ namespace PaymentProcessor
         {
             foreach (IRule rule in rules)
             {
-                rule.TakeAction();
+                this.results.Add(rule.TakeAction());
             }
-            Console.WriteLine("");
+            //   Console.WriteLine("");
         }
-
-        public Payment()
+        public void PaymentProcessor()
         {
             Notify();
+
+        }
+        public Payment()
+        {
         }
     }
 
@@ -64,7 +67,10 @@ namespace PaymentProcessor
 
     public class PhysicalProductPayment : Payment
     {
-
+        public PhysicalProductPayment()
+        {
+            this.PaymentInfo= PaymentInfoEnum.PhysicalProductPayment ;
+        }
     }
 
     public class NewMembership : Payment
