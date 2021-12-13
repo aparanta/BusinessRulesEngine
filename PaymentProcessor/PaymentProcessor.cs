@@ -5,7 +5,7 @@ namespace PaymentProcessor
 
 {
 
-    public enum PaymentInfoEnum
+    public enum PaymentInfo
     {
         PhysicalProductPayment,
         NewMembership,
@@ -14,8 +14,26 @@ namespace PaymentProcessor
 
         VideoPayment,
 
-        CommissionGenerated
+    }
 
+
+      public enum ActionInfo
+    {
+        GeneratePackingSlip,
+        ActivateMembership,
+
+        IssueCommission,
+
+        EmailForActivation,
+
+        UpgradeMembership
+
+    }
+
+    public abstract class Product 
+    {
+        public string Title {get;set;}
+   
     }
 
 
@@ -27,8 +45,9 @@ namespace PaymentProcessor
 
         public int Amount { get; set; }
 
-        public PaymentInfoEnum PaymentInfo { get; set; }
+        public PaymentInfo PaymentInfo { get; set; }
 
+        public Product Product {get ;set;}
 
         private List<IRule> rules = new List<IRule>();
 
@@ -62,14 +81,14 @@ namespace PaymentProcessor
     public class Result
     {
         public bool IsSuccess { get; set; }
-        public PaymentInfoEnum ActionInfo { get; set; }
+        public ActionInfo ActionInfo { get; set; }
     }
 
     public class PhysicalProductPayment : Payment
     {
         public PhysicalProductPayment()
         {
-            this.PaymentInfo= PaymentInfoEnum.PhysicalProductPayment ;
+            this.PaymentInfo= PaymentInfo.PhysicalProductPayment ;
         }
     }
 

@@ -4,6 +4,8 @@ using PaymentProcessor;
 namespace PaymentProcessor.Rules
 
 {
+    //place holder for events or call to external apis
+  
     public interface IRule
     {
         public Result TakeAction();
@@ -11,31 +13,41 @@ namespace PaymentProcessor.Rules
 
     public class GeneratePackingSlip : IRule
     {
-      public  Result TakeAction()
+        public Result TakeAction()
         {
-            return new Result { IsSuccess = true, ActionInfo = PaymentInfoEnum.PhysicalProductPayment };
+            return new Result { IsSuccess = true, ActionInfo = ActionInfo.GeneratePackingSlip };
 
         }
     }
 
 
-public class ActivateMembership : IRule
+    public class ActivateMembership : IRule
     {
-     public   Result TakeAction()
+        public Result TakeAction()
         {
-            return new Result { IsSuccess = true, ActionInfo = PaymentInfoEnum.NewMembership };
+            return new Result { IsSuccess = true, ActionInfo = ActionInfo.ActivateMembership };
 
         }
     }
 
-public class IssueCommission :IRule
-{
-    public  Result TakeAction()
+    public class IssueCommission : IRule
+    {
+        public Result TakeAction()
         {
-            return new Result { IsSuccess = true, ActionInfo = PaymentInfoEnum.CommissionGenerated };
+            return new Result { IsSuccess = true, ActionInfo = ActionInfo.IssueCommission };
 
         }
 
-}
+    }
+
+    public class EmailForActivation : IRule
+    {
+        public Result TakeAction()
+        {
+            return new Result { IsSuccess = true, ActionInfo = ActionInfo.EmailForActivation };
+
+        }
+
+    }
 
 }
