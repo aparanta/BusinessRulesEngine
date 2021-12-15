@@ -17,7 +17,7 @@ namespace PaymentProcessor
     }
 
 
-      public enum ActionInfo
+    public enum ActionInfo
     {
         GeneratePackingSlip,
         ActivateMembership,
@@ -30,11 +30,13 @@ namespace PaymentProcessor
 
     }
 
-    public abstract class Product 
+    public abstract class Product
     {
-        public string Title {get;set;}
-   
+        public string Title { get; set; }
+
     }
+
+
 
 
     public abstract class Payment
@@ -47,7 +49,7 @@ namespace PaymentProcessor
 
         public PaymentInfo PaymentInfo { get; set; }
 
-        public Product Product {get ;set;}
+        public Product Product { get; set; }
 
         private List<IRule> rules = new List<IRule>();
 
@@ -88,23 +90,41 @@ namespace PaymentProcessor
     {
         public PhysicalProductPayment()
         {
-            this.PaymentInfo= PaymentInfo.PhysicalProductPayment ;
+            this.PaymentInfo = PaymentInfo.PhysicalProductPayment;
         }
     }
 
     public class NewMembership : Payment
     {
-
+        public NewMembership()
+        {
+            this.PaymentInfo = PaymentInfo.NewMembership;
+        }
     }
 
     public class UpgradeMembership : Payment
     {
-
+        public UpgradeMembership()
+        {
+            this.PaymentInfo = PaymentInfo.UpgradeMembership;
+        }
     }
 
     public class VideoPayment : Payment
     {
+        public VideoPayment()
+        {
+            this.PaymentInfo = PaymentInfo.VideoPayment;
+        }
+    }
 
+    public class BookPayment : Payment
+    {
+        public BookPayment()
+        {
+            this.PaymentInfo = PaymentInfo.BookPayment;
+           
+        }
     }
 
 

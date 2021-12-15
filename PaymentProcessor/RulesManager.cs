@@ -29,6 +29,21 @@ namespace PaymentProcessor.Rules
                     payment.Attach(new EmailForActivation());
                     break;
 
+                 case PaymentInfo.BookPayment:
+                    //if (payment.PaymentInfo ==PaymentInfo.PhysicalProductPayment)
+
+                    payment.Attach(new GeneratePackingSlip());
+                    payment.Attach(new DuplicatePackingSlip());
+                    //TODO add product class to differentiate and pull rules
+                    break;
+
+                 case PaymentInfo.VideoPayment:
+                    //if (payment.PaymentInfo ==PaymentInfo.PhysicalProductPayment)
+
+                    payment.Attach(new GeneratePackingSlip());
+                    
+                    break;
+
 
                 default:
                     break;

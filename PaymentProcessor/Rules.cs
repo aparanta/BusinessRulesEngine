@@ -20,6 +20,15 @@ namespace PaymentProcessor.Rules
         }
     }
 
+    public class DuplicatePackingSlip : IRule
+    {
+        public Result TakeAction()
+        {
+            return new Result { IsSuccess = true, ActionInfo = ActionInfo.GeneratePackingSlip };
+
+        }
+    }
+
 
     public class ActivateMembership : IRule
     {
